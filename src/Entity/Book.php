@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="book", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_CBE5A331989D9B62", columns={"slug"})}, indexes={@ORM\Index(name="IDX_CBE5A331F675F31B", columns={"author_id"})})
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Book
 {
@@ -69,7 +70,7 @@ class Book
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=255, nullable=false)
+     * @ORM\Column(name="slug", type="string", length=190, nullable=false)
      */
     private $slug;
 
@@ -233,4 +234,19 @@ class Book
         return $this;
     }
 
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue()
+    {
+        $this->setCreatedAt(new \DateTime());
+    }
+
+    /**
+     * @ORM\PostUpdate
+     */
+    public function setUpdatedAtValue()
+    {
+        $this->setUpdatedAt(new \DateTime());
+    }
 }
