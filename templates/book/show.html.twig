@@ -4,26 +4,31 @@
 {% endblock %}
 
 {% block body %}
-    {{ dump(book) }}
+<section class="container">
     <h1>{{ book.title }}</h1>
-    <img src="{{ asset('uploads/hpelcdf.jpg') }}" alt="{{ book.title }}">
+    <img src="{{ asset('uploads/') }}{{ book.image }}" alt="{{ book.title }}">
     <h2>Auteur</h2>
     {{ book.author.fullname }}
-    <h2>Catégories</h2>
+    <h2>Liste des catégories du livre</h2>
     <ul>
     {% for category in book.category %}
-        <li><a href="{{ path('category_show', {'id': category.id}) }}">{{ category.name }}</a></li>
+        <li>
+            <a href="{{ path('category_show', {'id': category.id}) }}">
+                {{ category.name }}
+            </a>
+        </li>
     {% endfor %}
     </ul>
 
     <h2>Liste des livres du même auteur</h2>
-    <ul>
+    <div class="row flex-grow-1">
         {% for otherbook in otherbooks %}
-            <li>
-                <a href="{{ path('book_show', {'slug' : otherbook.slug}) }}">{{ otherbook.title }}</a>
-            </li>
-            {% else %}
-            <li>Aucun autre livre</li>
+            <div class="col-sm-6 col-md-3">
+                {% include 'book/card.html.twig' with {'book' : otherbook} only %}
+            </div>
+        {% else %}
+            Aucun autre livre
         {% endfor %}
-    </ul>
+    </div>
+</section>
 {% endblock %}

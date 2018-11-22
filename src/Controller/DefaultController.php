@@ -12,10 +12,22 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class DefaultController
  * @package App\Controller
- * @Route("/default")
  */
 class DefaultController extends BaseController
 {
+    /**
+     * @Route("/", name="homepage")
+     */
+    public function homepage()
+    {
+        $books = $this->getDoctrine()->getRepository(Book::class)->findLast(6);
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+        return $this->render('default/homepage.html.twig', [
+            "books" => $books,
+            "categories" => $categories
+        ]);
+
+    }
     /**
      * @Route("/{nom}", name="default")
      */
@@ -37,4 +49,5 @@ class DefaultController extends BaseController
     {
         return new Response($book->getTitle());
     }
+
 }
