@@ -31,7 +31,7 @@ class DefaultController extends BaseController
     /**
      * @Route("/{nom}", name="default")
      */
-    public function index(string $nom, Request $request)
+    /*public function index(string $nom, Request $request)
     {
         //$categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
         $author = $this->getDoctrine()->getRepository(Author::class)->findOneBy(["lastname" => $nom]);
@@ -40,14 +40,14 @@ class DefaultController extends BaseController
         }
 
         return $this->render("default/index.html.twig", ["author" => $author]);
-    }
+    }*/
 
     /**
      * @Route("/book/{slug}", name="show-book")
      */
-    public function showBook(Book $book)
+    /*public function showBook(Book $book)
     {
         return new Response($book->getTitle());
-    }
+    }*/
 
 }
