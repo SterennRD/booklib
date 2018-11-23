@@ -95,4 +95,8 @@ class Author
         return $this->books;
     }
 
+    public function __toString()
+    {
+        return $this->getFullname();
+    }
 }

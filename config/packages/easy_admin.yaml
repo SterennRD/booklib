@@ -2,11 +2,24 @@ easy_admin:
     site_name: 'Ma super admin'
     entities:
         # List the entity class name you want to manage
-        - App\Entity\Author
-        - App\Entity\Book
-        - App\Entity\Box
-        - App\Entity\User
-        - App\Entity\Category
-        - App\Entity\Borrow
+#        - App\Entity\Author
+#        - App\Entity\Book
+#        - App\Entity\Box
+#        - App\Entity\User
+#        - App\Entity\Category
+#        - App\Entity\Borrow
+        Author:
+            class: App\Entity\Author
+            label: 'Auteur'
+            list:
+                title: 'Liste des auteurs'
+        Book:
+            class: App\Entity\Book
+            list:
+                title: 'Liste des livres'
+                fields:
+                    - { property: 'title' }
+                    - { property: 'image', type: 'image', base_path: '%app.path.uploads_dir%' }
+
     design:
         brand_color: '#00ccff'
